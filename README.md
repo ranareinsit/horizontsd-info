@@ -11,36 +11,43 @@
 
 #### Установка зависимостей
 ```bash
-
+apk update 
+apk upgrade
+apk add --no-cache libc6-compat
+npm install -g corepack
+npm -v
+corepack enable
+corepack install --global yarn@4.7.0
 ```
-
 
 Активация окружения
 ```bash
-
+cd horizontsd-info
+yarn install
 ```
-
 
 Запуск на своей машине
 ```bash
-
+yarn dev
+yarn build
+yarn start
+yarn lint
 ```
-
-
 
 # Запуск контейнера локально
 
 ### Строим контейнер
 ```bash
-sudo docker build -t horizon_info .
+sudo docker build --pull --rm -f Dockerfile -t horizontsdinfo:latest . --progress=plain
 ```
+
 Узнаем его ID
 ```bash
 sudo docker images
 ```
 
 ```bash
-sudo docker run -d -p 7070:7071 <IMAGE ID>
+sudo docker run -d -p 3000:3000 <IMAGE ID>
 ```
 
 # Запуск контейнера публично
@@ -55,14 +62,13 @@ sudo docker images
 ```
 
 ```bash
-docker run -d -p 7070:7070 <IMAGE ID>
+docker run -d -p 3000:3000 <IMAGE ID>
 ```
 
 ```bash
-docker run -d -p 80:7070 <IMAGE ID>
+docker run -d -p 80:3000 <IMAGE ID>
 ```
 
 ```bash
-docker run -d -p 7070:80 <IMAGE ID>
+docker run -d -p 3000:80 <IMAGE ID>
 ```
-
